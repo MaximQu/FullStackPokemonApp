@@ -13,7 +13,7 @@ import {
 import { useLazyGetPokemonsQuery } from "@/redux/api/api";
 import { IOptions, IPokemon } from "@/redux/types";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 export const Home = () => {
@@ -43,7 +43,6 @@ export const Home = () => {
 	}, []);
 	const [favorites, setFavorites] = useState(() => favoritesInitialState);
 	const [fetchTrigger, { data, isLoading, error }] = useLazyGetPokemonsQuery();
-	const previousOptionsRef = useRef<IOptions>(optionsInitialState);
 
 	useEffect(() => {
 		localStorage.setItem("favoritePokemon", JSON.stringify(favorites));
@@ -51,12 +50,7 @@ export const Home = () => {
 	}, [favorites, options]);
 
 	useEffect(() => {
-		if (
-			JSON.stringify(options) !== JSON.stringify(previousOptionsRef.current)
-		) {
-			fetchTrigger(options);
-			previousOptionsRef.current = options;
-		}
+		fetchTrigger(options);
 	}, [options, fetchTrigger]);
 
 	if (isLoading) return <Loading />;

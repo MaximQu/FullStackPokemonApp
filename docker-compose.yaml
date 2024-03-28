@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:5.0.2
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=Max
+      - MONGO_INITDB_ROOT_PASSWORD=animeonelove
+    ports:
+      - $MONGODB_LOCAL_PORT:7017
+    volumes:
+      - db:/data/db
+
+  server:
+    depends_on:
+      - mongodb
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 31786:31786
+    stdin_open: true
+    tty: true
+
+
+volumes:
+  db:
