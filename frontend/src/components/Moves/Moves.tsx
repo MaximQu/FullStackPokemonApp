@@ -10,7 +10,7 @@ export const Moves: FC<MovesProps> = ({ data }) => {
 				{data?.length === 0 ? (
 					<p>No moves.</p>
 				) : (
-					<p className="text-sm md:text-lg">
+					<p className="text-base md:text-lg">
 						{data?.map((item) => item).join(", ")}.
 					</p>
 				)}

@@ -7,7 +7,7 @@ services:
     env_file: ./.env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=Max
-      - MONGO_INITDB_ROOT_PASSWORD=animeonelove
+      - MONGO_INITDB_ROOT_PASSWORD=pokemononelove
     ports:
       - $MONGODB_LOCAL_PORT:7017
     volumes:
@@ -17,13 +17,13 @@ services:
     depends_on:
       - mongodb
     build: .
+    env_file: ./.env
     environment:
       NODE_ENV: production
     ports:
       - 31786:31786
     stdin_open: true
     tty: true
-
 
 volumes:
   db:

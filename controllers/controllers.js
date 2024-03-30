@@ -3,7 +3,7 @@ import { Pokemon, PokemonType } from '../models/models.js';
 const pokemonController = {
   getPokemon: async (req, res) => {
     try {
-      const { offset, name, type, sortType } = req.query;
+      const { offset, name, type, sortBy, sortDir } = req.query;
       const options = {};
       if (name) {
         const regex = new RegExp('^' + name);
@@ -12,9 +12,9 @@ const pokemonController = {
           $options: 'i',
         };
       }
-      if (type) options.types = type.toLowerCase();
+      if (type) options.types = type;
       const sorting = {};
-      if (sortType) sorting[sortType.toLowerCase()] = 1;
+      sorting[sortBy] = Number(sortDir);
 
       const count = await Pokemon.find(options).countDocuments();
       const results = await Pokemon.find(options).sort(sorting).skip(offset).limit(20);
@@ -51,7 +51,7 @@ const pokemonController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  }
+  },
 };
 
 export default pokemonController;

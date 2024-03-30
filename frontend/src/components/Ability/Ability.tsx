@@ -2,12 +2,13 @@ import { FC } from "react";
 
 type AbilityProps = {
 	data?: string[];
+  className?: string
 };
 
-export const Ability: FC<AbilityProps> = ({ data }) => {
+export const Ability: FC<AbilityProps> = ({ data,className }) => {
 	return (
-		<div>
-			<span className="mb-2 block text-2xl">Abilities:</span>
+		<div className={className}>
+			<span className="xs:mb-2 block text-2xl">Abilities:</span>
 			<ul className="flex flex-wrap gap-2 text-primary">
 				{data?.map((item) => (
 					<li

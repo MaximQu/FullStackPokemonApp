@@ -19,78 +19,6 @@ body {
 	color: white;
 }
 
-main {
-	padding-block: 2rem;
-}
-
-.container {
-	width: min(calc(100% - 2rem), 71.25rem);
-	margin-inline: auto;
-}
-
-.input {
-	border-bottom: 1px solid #283959;
-	border-top: none;
-	outline: none;
-	font-size: 1.3rem;
-	color: #283959;
-	transition-duration: 0.2s;
-	padding: 0.75rem;
-	max-width: 15.625rem;
-	width: 100%;
-}
-
-.btn {
-	padding: 0.5rem 1.5rem;
-	background-color: #f2bc8d;
-	position: relative;
-	font-size: 1.2rem;
-	color: white;
-}
-
-.btn:hover span {
-	display: block;
-	scale: 1.05;
-}
-
-.btn:active {
-	scale: 1.05;
-}
-
-.btn:before {
-	content: "";
-	width: 100%;
-	height: 100%;
-	background-color: #f29f8d;
-	position: absolute;
-	top: -5px;
-	left: -5px;
-	z-index: -1;
-	transition-duration: 0.2s;
-}
-
-.btn:hover:before {
-	top: 0;
-	left: 0;
-}
-
-.btn:after {
-	content: "";
-	width: 100%;
-	height: 100%;
-	background-color: #69688c;
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	z-index: -1;
-	transition-duration: 0.2s;
-}
-
-.btn:hover:after {
-	top: 0;
-	left: 0;
-}
-
 ::-webkit-scrollbar {
 	width: 10px;
 	height: 10px;
@@ -109,29 +37,30 @@ main {
 	background: #555;
 }
 
-.loading {
-	position: absolute;
-	inset: 0;
-	top: -320px;
-	display: inline-block;
-	width: 60px;
-	height: 60px;
-	margin: auto;
+main {
+	padding-block: 1rem;
 }
 
-.loading:after {
-	content: " ";
-	display: block;
-	width: 44px;
-	height: 44px;
-	margin: 6px;
-	border-radius: 50%;
-	border: 4px solid #fff;
-	border-color: #fff transparent #fff transparent;
-	animation: loading-animation 1.2s linear infinite;
+.container {
+	width: min(calc(100% - 2rem), 71.25rem);
+	margin-inline: auto;
 }
 
-@keyframes loading-animation {
+@layer base {
+	.loading {
+		@apply absolute inset-0 -top-80 m-auto inline-block h-16 w-16 after:m-1.5 after:block after:h-11 after:w-11 after:animate-[loading_1.2s_linear_infinite] after:rounded-[50%] after:border-4 after:border-transparent after:border-b-white after:border-r-transparent after:border-t-white;
+	}
+
+	.btn {
+		@apply relative bg-lightPeach px-6 py-2 text-xl duration-150 *:block before:absolute before:-left-1 before:-top-1 before:-z-10 before:h-full before:w-full before:bg-secondary before:duration-150 after:absolute after:left-1 after:top-1 after:-z-10 after:h-full after:w-full after:bg-purple after:duration-150 hover:*:scale-105 hover:before:left-0 hover:before:top-0 hover:after:left-0 hover:after:top-0 active:scale-105;
+	}
+
+	.input {
+		@apply w-full max-w-64 border-b-primary border-t-transparent p-3 py-2 text-xl text-primary outline-none duration-150;
+	}
+}
+
+@keyframes loading {
 	0% {
 		transform: rotate(0deg);
 	}
@@ -140,8 +69,13 @@ main {
 	}
 }
 
-.showFav {
-	animation: showFav 0.5s;
+@layer base {
+	.showFav {
+		@apply animate-[showFav_0.5s];
+	}
+	.hideFav {
+		@apply animate-[showFav_0.5s_reverse];
+	}
 }
 
 @keyframes showFav {

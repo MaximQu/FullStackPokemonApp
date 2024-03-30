@@ -1,4 +1,4 @@
-import { IOptions } from "@/redux/types";
+import { IOptions } from "@/types/types";
 import { ChangeEvent, FC, useState } from "react";
 
 type SearchProps = {
@@ -28,7 +28,7 @@ export const Search: FC<SearchProps> = ({ setOptions, options }) => {
 	return (
 		<>
 			<form
-				className="mx-auto mb-10 flex flex-col items-center justify-center gap-3"
+				className="mx-auto mb-6 flex  flex-col items-center justify-center gap-3 md:mb-10"
 				onSubmit={(e) => {
 					e.preventDefault();
 					setOptions((prev) => ({
@@ -40,22 +40,27 @@ export const Search: FC<SearchProps> = ({ setOptions, options }) => {
 					}));
 				}}
 			>
-				<div className="flex gap-3">
-					<input
-						type="text"
-						name="search_text"
-						className="input"
-						onChange={handleChange}
-						onKeyDown={handleFetch}
-						placeholder="Enter pokemon's name"
-					/>
-					<button className="btn" type="submit">
-						<span>Go!</span>
-					</button>
+				<div className="">
+					<div className="mb-2 flex gap-3">
+						<input
+							type="text"
+							name="search_text"
+							className="input"
+							onChange={handleChange}
+							onKeyDown={handleFetch}
+							placeholder="Enter pokemon's name"
+						/>
+						<button className="btn" type="submit">
+							<span>Go!</span>
+						</button>
+					</div>
+					<span>
+						Your last search value:{" "}
+						<span className="text-lg capitalize tracking-wider text-lightPeach">
+							{options.name}
+						</span>
+					</span>
 				</div>
-				<span className="mt-2 block">
-					Your last search value: {options.name}
-				</span>
 			</form>
 		</>
 	);

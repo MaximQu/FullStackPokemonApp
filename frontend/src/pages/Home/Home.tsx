@@ -1,3 +1,4 @@
+import { useLazyGetPokemonsQuery } from "@/api/pokemonApi";
 import {
 	ErrorFallback,
 	Favorites,
@@ -10,8 +11,7 @@ import {
 	Sort,
 	ToTopBtn,
 } from "@/components";
-import { useLazyGetPokemonsQuery } from "@/redux/api/api";
-import { IOptions, IPokemon } from "@/redux/types";
+import { IOptions, IPokemon } from "@/types/types";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useEffect, useMemo, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -27,7 +27,10 @@ export const Home = () => {
 			: {
 					type: "",
 					name: "",
-					sortType: "",
+					sortType: {
+						name: "name",
+						direction: 1,
+					},
 					offset: 0,
 				};
 
@@ -71,7 +74,7 @@ export const Home = () => {
 					setShowFavorite={setShowFavorite}
 					showFavorite={showFavorite}
 				/>
-				<h1 className="mb-4 text-center text-4xl font-medium">
+				<h1 className="mb-4 text-center text-2xl font-medium sm:text-4xl">
 					Search your pokemon!
 				</h1>
 				<Search setOptions={setOptions} options={options} />

@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import { url } from '../config/db.config.js';
 
 const db = {};
-
 db.url = url;
 
 const pokemonSchema = new mongoose.Schema({

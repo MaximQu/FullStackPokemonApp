@@ -13,10 +13,19 @@ export interface IPokemon {
 	types: string[];
 }
 
+// export enum SortName {
+// 	"name",
+// 	"weight",
+// 	"height",
+// }
+
 export interface IOptions {
 	type: string;
 	name: string;
-	sortType: string;
+	sortType: {
+		name: string;
+		direction: number;
+	};
 	offset: number;
 }
 

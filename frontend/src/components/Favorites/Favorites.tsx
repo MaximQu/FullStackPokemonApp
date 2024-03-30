@@ -1,4 +1,4 @@
-import { IPokemon } from "@/redux/types";
+import { IPokemon } from "@/types/types";
 import { ElementRef, FC, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
@@ -57,9 +57,15 @@ export const Favorites: FC<FavoritesProps> = ({
 
 	if (favorites.length === 0) {
 		return (
-			<div className="fixed right-4 top-24 z-10 flex max-w-[32rem] flex-wrap items-center justify-center gap-4 rounded-lg bg-slate-400 p-4">
+			<div
+				ref={listRef}
+				className={twMerge(
+					"showFav fixed right-4 top-24 z-10 flex max-w-[32rem] flex-wrap items-center justify-center gap-4 rounded-lg bg-slate-400 p-4",
+					!showFavorite && "hideFav",
+				)}
+			>
 				<button
-					className=" block h-6 w-6 rounded-full border border-primary duration-150 hover:rotate-90"
+					className="block h-6 w-6 rounded-full border border-white duration-150 hover:rotate-90"
 					type="button"
 					onClick={() => setShowFavorite(false)}
 				>
@@ -73,7 +79,10 @@ export const Favorites: FC<FavoritesProps> = ({
 	return (
 		<div
 			ref={listRef}
-			className="showFav fixed top-0 z-[100] sm:inset-auto inset-0 flex h-full w-full sm:max-w-[30rem] flex-wrap justify-center gap-4 bg-white text-primary sm:right-4 sm:top-24 sm:h-auto sm:rounded-lg"
+			className={twMerge(
+				"showFav fixed inset-0 top-0 z-[100] flex h-full w-full flex-wrap justify-center gap-4 bg-white text-primary sm:inset-auto sm:right-4 sm:top-24 sm:h-auto sm:max-w-[30rem] sm:rounded-lg",
+				!showFavorite && "hideFav",
+			)}
 		>
 			<button
 				className="absolute left-2 top-2 z-10 block w-7 text-3xl leading-none duration-150 hover:rotate-90 hover:scale-105"
